@@ -51,6 +51,9 @@ jobs:
           fi
           
           echo "Found package identifier: $IDENTIFIER"
+
+          echo "Tagging package $IDENTIFIER with 'ready-for-production'"
+          cloudsmith tags add ${{ env.CLOUDSMITH_NAMESPACE }}/${{ env.CLOUDSMITH_STAGING_REPO }}/$IDENTIFIER ready-for-production
           
           # Promote package using the identifier
           cloudsmith mv --yes \
