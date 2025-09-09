@@ -5,7 +5,6 @@
       run: python -m build
 
 
-
 ### Issue 2: Project name needs to be passed
     name = "example_package"
 
