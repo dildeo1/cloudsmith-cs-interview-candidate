@@ -16,6 +16,7 @@ env:
 permissions:
   contents: read
   actions: read
+  id-token: write
 
 jobs:
   publish:
@@ -39,8 +40,11 @@ jobs:
         shell: bash
 
 
-      - name: Install cloudsmith cli
-        run: pip install --upgrade cloudsmith-cli
+      - name: Install Cloudsmith CLI and authenticate with OIDC
+        uses: cloudsmith-io/cloudsmith-cli-action@v1.0.1
+        with:
+          oidc-namespace: ${{ env.CLOUDSMITH_NAMESPACE }}
+          oidc-service-slug: ${{ env.CLOUDSMITH_SERVICE_SLUG }}
 
       - name: Push package to Cloudsmith
         run: |
